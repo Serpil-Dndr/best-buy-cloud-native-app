@@ -14,7 +14,7 @@ This application is inspired by Azure Kubernetes Service (AKS) quickstart demo [
 ## Architecture
 
 The application has the following services: 
-
-| Service       | Description                                    | Github Repo                                                    |
-|---------------|------------------------------------------------|---------------------------------------------------------------|
-| `store-front-bestbuy` | Web app for customers to place orders (Vue.js) | [store-front-bestbuy](https://github.com/Serpil-Dndr/store-front-bestbuy.git) |
+| Service                 | Description                                    | Github Repo                                                      |
+|-------------------------|------------------------------------------------|-------------------------------------------------------------------|
+| `store-front-bestbuy`    | Web app for customers to place orders (Vue.js) | [store-front-bestbuy](https://github.com/Serpil-Dndr/store-front-bestbuy.git) |
+| `product-service-bestbuy`| Service to manage products for Best Buy        | [product-service-bestbuy](https://github.com/Serpil-Dndr/product-service-bestbuy.git) |
