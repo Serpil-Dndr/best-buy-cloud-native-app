@@ -22,3 +22,6 @@ The application has the following services:
 | `store-admin-bestbuy`    | Admin interface to manage Best Buy products    | [store-admin-bestbuy](https://github.com/Serpil-Dndr/store-admin-bestbuy.git) |
 | `ai-service-bestbuy`     | AI service to generate product descriptions and images | [ai-service-bestbuy](https://github.com/Serpil-Dndr/ai-service-bestbuy.git) |
 | `makeline-service-bestbuy`| Service to manage product assembly lines for Best Buy | [makeline-service-bestbuy](https://github.com/Serpil-Dndr/makeline-service-bestbuy.git) |
+| `virtual-customer-bestbuy`| Simulates virtual customer interactions for testing | [virtual-customer-bestbuy](https://github.com/Serpil-Dndr/virtual-customer-bestbuy.git) |
+| `virtual-worker-bestbuy` | Service to simulate virtual workers for Best Buy testing | [virtual-worker-bestbuy](https://github.com/Serpil-Dndr/virtual-vorker-bestbuy.git) |
+
