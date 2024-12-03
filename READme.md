@@ -11,7 +11,7 @@ This application is inspired by Azure Kubernetes Service (AKS) quickstart demo [
 ---
 
 ## Architecture
-## Architecture
+![bestbuy architecture](image.png)
 
 The application has the following services: 
 | Service                 | Description                                    | Github Repo                                                      |
