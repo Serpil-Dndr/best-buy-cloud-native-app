@@ -1,5 +1,5 @@
-# Best Buy Store (Enhanced)
-Welcome to the **Best Buy Store (Enhanced)** application.
+# Cloud-Native App for Best Buy
+Welcome to the **Best Buy Store ** application.
 
 This sample demo app consists of a group of containerized microservices that can be easily deployed into a Kubernetes cluster. It demonstrates a realistic scenario using a polyglot architecture, event-driven design, and common open-source back-end services (e.g., RabbitMQ, MongoDB). The application also integrates OpenAI's models to generate product descriptions and recommendations. This functionality can utilize either [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/overview) or [OpenAI](https://openai.com/).
 
