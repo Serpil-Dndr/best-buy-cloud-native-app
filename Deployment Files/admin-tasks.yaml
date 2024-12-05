@@ -16,7 +16,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: virtual-customer
-          image: serpildundar/virtual-customer-bestbuy-l8:latest
+          image: serpild/virtual-customer:latest  # Update image to your custom image
           env:
             - name: ORDER_SERVICE_URL
               value: http://order-service:3000/
@@ -48,7 +48,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: virtual-worker
-          image:  serpildundar/virtual-worker-bestbuy-l8:latest
+          image: serpild/virtual-worker:latest  # Update image to your custom image
           env:
             - name: MAKELINE_SERVICE_URL
               value: http://makeline-service:3001

@@ -13,6 +13,8 @@ This application is inspired by Azure Kubernetes Service (AKS) quickstart demo [
 ## Architecture
 ![bestbuy architecture](image.png)
 
+## Table of Microservice Repositories:
+
 The application has the following services: 
 | Service                 | Description                                    | Github Repo                                                      |
 |-------------------------|------------------------------------------------|-------------------------------------------------------------------|
@@ -24,4 +26,8 @@ The application has the following services:
 | `makeline-service-bestbuy`| Service to manage product assembly lines for Best Buy | [makeline-service-bestbuy](https://github.com/Serpil-Dndr/makeline-service-bestbuy.git) |
 | `virtual-customer-bestbuy`| Simulates virtual customer interactions for testing | [virtual-customer-bestbuy](https://github.com/Serpil-Dndr/virtual-customer-bestbuy.git) |
 | `virtual-worker-bestbuy` | Service to simulate virtual workers for Best Buy testing | [virtual-worker-bestbuy](https://github.com/Serpil-Dndr/virtual-vorker-bestbuy.git) |
+
+## Table of Docker Images
+
+
 
