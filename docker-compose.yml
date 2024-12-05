@@ -1,64 +1,19 @@
-version: '3'
+version: '3.8'
 
 services:
-  # RabbitMQ service definition
+  # RabbitMQ Service
   rabbitmq:
     image: "rabbitmq:3-management"
     ports:
       - "5672:5672"   # RabbitMQ messaging port
-      - "15672:15672" # RabbitMQ management plugin UI port
+      - "15672:15672" # RabbitMQ management UI
     environment:
       - RABBITMQ_DEFAULT_USER=myuser
       - RABBITMQ_DEFAULT_PASS=mypassword
 
-  # Virtual Worker service definition
-  virtual-worker:
-    image: serpild/virtual-worker:latest
-    container_name: virtual-worker-container
-    ports:
-      - "8081:8080"
-    depends_on:
-      - rabbitmq
-
-  # Virtual Customer service definition
-  virtual-customer:
-    image: serpild/virtual-customer:latest
-    container_name: virtual-customer-container
-    ports:
-      - "8082:8080"
-    depends_on:
-      - rabbitmq
-
-  # Makeline Service definition
-  makeline-service:
-    image: serpild/makeline-service:latest
-    container_name: makeline-service-container
-    ports:
-      - "8083:8080"
-    depends_on:
-      - rabbitmq
-
-  # AI Service definition
-  ai-service:
-    image: serpild/ai-service:latest
-    container_name: ai-service-container
-    ports:
-      - "8084:8080"
-    depends_on:
-      - rabbitmq
-
-  # Store Admin Service definition
-  store-admin:
-    image: serpild/store-admin:latest
-    container_name: store-admin-container
-    ports:
-      - "8085:8080"
-    depends_on:
-      - rabbitmq
-
-  # Order Service definition
+  # Order Service
   order-service:
-    build: ./order-service-L4
+    image: "serpild/order-service"
     ports:
       - "3000:3000"
     environment:
@@ -67,24 +22,62 @@ services:
     depends_on:
       - rabbitmq
 
-  # Product Service definition
+  # Product Service
   product-service:
-    build: ./product-service-python-L4
+    image: "serpild/product-service"
     ports:
       - "3030:3030"
     environment:
       - PORT=3030
-    depends_on:
-      - rabbitmq
 
-  # Store Front (Frontend) service definition
+  # Store Front (Frontend Service)
   store-front:
-    build: ./store-front-L4
+    image: "serpild/store-front"
     ports:
       - "80:80"
     environment:
       - VUE_APP_ORDER_SERVICE_URL=http://order-service:3000
       - VUE_APP_PRODUCT_SERVICE_URL=http://product-service:3030
     depends_on:
-      - product-service
       - order-service
+      - product-service
+
+  # AI Service
+  ai-service:
+    image: "serpild/ai-service"
+    ports:
+      - "4000:4000" # Specify the correct port if needed
+    environment:
+      - PORT=4000
+
+  # Makeline Service
+  makeline-service:
+    image: "serpild/makeline-service"
+    ports:
+      - "5001:5000" # Specify the correct port if needed
+    environment:
+      - PORT=5000
+
+  # Virtual Worker Service
+  virtual-worker:
+    image: "serpild/virtual-worker"
+    ports:
+      - "6000:6000" # Specify the correct port if needed
+    environment:
+      - PORT=6000
+
+  # Virtual Customer Service
+  virtual-customer:
+    image: "serpild/virtual-customer"
+    ports:
+      - "7100:7000" # Specify the correct port if needed
+    environment:
+      - PORT=7000
+
+  # Store Admin Service
+  store-admin:
+    image: "serpild/store-admin"
+    ports:
+      - "8080:8080" # Specify the correct port if needed
+    environment:
+      - PORT=8080
