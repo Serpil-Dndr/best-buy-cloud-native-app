@@ -11,8 +11,9 @@ This application is inspired by Azure Kubernetes Service (AKS) quickstart demo [
 ---
 
 ## Architecture
-![architecture](https://github.com/user-attachments/assets/ec8c47d8-9c7f-4834-a954-46353c70242c)
 
+
+![architecture](image-1.png)
 
 ## Table of Microservice Repositories:
 
