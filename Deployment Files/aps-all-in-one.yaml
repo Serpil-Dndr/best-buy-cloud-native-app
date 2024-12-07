@@ -4,39 +4,39 @@ kind: StatefulSet
 metadata:
   name: mongodb
 spec:
-  serviceName: mongodb
-  replicas: 1
+  serviceName: mongodb # Associated headless service for DNS resolution
+  replicas: 1 # Number of MongoDB replicas
   selector:
     matchLabels:
-      app: mongodb
+      app: mongodb # Labels to match for this StatefulSet
   template:
     metadata:
       labels:
-        app: mongodb
+        app: mongodb # Pod label for identification
     spec:
       nodeSelector:
-        "kubernetes.io/os": linux
+        "kubernetes.io/os": linux # Run only on Linux nodes
       containers:
         - name: mongodb
-          image: mongo:4.2
+          image: mongo:4.2 # MongoDB container image version
           ports:
-            - containerPort: 27017
+            - containerPort: 27017 # Default MongoDB port
               name: mongodb
-          resources:
+          resources: # Resource requests and limits for MongoDB
             requests:
-              cpu: 5m
-              memory: 75Mi
+              cpu: 5m # Minimum CPU
+              memory: 75Mi # Minimum Memory
             limits:
-              cpu: 25m
-              memory: 1024Mi
-          livenessProbe:
+              cpu: 25m # Maximum CPU
+              memory: 1024Mi # Maximum Memory
+          livenessProbe: # Probe to check MongoDB health
             exec:
               command:
                 - mongosh
                 - --eval
                 - db.runCommand('ping').ok
-            initialDelaySeconds: 5
-            periodSeconds: 5
+            initialDelaySeconds: 5 # Wait time before starting probe
+            periodSeconds: 5 # Interval between probes
 ---
 # Service to expose MongoDB
 apiVersion: v1
@@ -45,10 +45,10 @@ metadata:
   name: mongodb
 spec:
   ports:
-    - port: 27017
+    - port: 27017 # MongoDB service port
   selector:
-    app: mongodb
-  type: ClusterIP
+    app: mongodb # Target pods with label `app: mongodb`
+  type: ClusterIP # Internal cluster service
 ---
 # StatefulSet for RabbitMQ
 apiVersion: apps/v1
@@ -56,8 +56,8 @@ kind: StatefulSet
 metadata:
   name: rabbitmq
 spec:
-  serviceName: rabbitmq
-  replicas: 1
+  serviceName: rabbitmq # Headless service for RabbitMQ
+  replicas: 1 # Single replica
   selector:
     matchLabels:
       app: rabbitmq
@@ -70,25 +70,25 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: rabbitmq
-          image: rabbitmq:3-management
+          image: rabbitmq:3-management # RabbitMQ image with management UI
           ports:
-            - containerPort: 5672
+            - containerPort: 5672 # AMQP protocol port
               name: rabbitmq-amqp
-            - containerPort: 15672
+            - containerPort: 15672 # HTTP management UI port
               name: rabbitmq-http
-          env:
+          env: # Environment variables for RabbitMQ
             - name: RABBITMQ_DEFAULT_USER
-              value: "username"
+              value: "username" # Default username
             - name: RABBITMQ_DEFAULT_PASS
-              value: "password"
-          resources:
+              value: "password" # Default password
+          resources: # Resource limits and requests
             requests:
               cpu: 10m
               memory: 128Mi
             limits:
               cpu: 250m
               memory: 256Mi
-          volumeMounts:
+          volumeMounts: # Mount configuration for RabbitMQ plugins
             - name: rabbitmq-enabled-plugins
               mountPath: /etc/rabbitmq/enabled_plugins
               subPath: enabled_plugins
@@ -121,25 +121,25 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-service-bestbuy
+  name: order-service
 spec:
-  replicas: 1
+  replicas: 1 # Single replica
   selector:
     matchLabels:
-      app: order-service-bestbuy
+      app: order-service
   template:
     metadata:
       labels:
-        app: order-service-bestbuy
+        app: order-service
     spec:
       nodeSelector:
         "kubernetes.io/os": linux
       containers:
-        - name: order-service-bestbuy
-          image: serpild/order-service:latest  # Update image to your custom image
+        - name: order-service
+          image: serpild/order-service-l8:latest # Custom image for order service
           ports:
-            - containerPort: 3000
-          env:
+            - containerPort: 3000 # Order service listens on this port
+          env: # Environment variables for configuration
             - name: ORDER_QUEUE_HOSTNAME
               value: "rabbitmq"
             - name: ORDER_QUEUE_PORT
@@ -152,35 +152,35 @@ spec:
               value: "orders"
             - name: FASTIFY_ADDRESS
               value: "0.0.0.0"
-          resources:
+          resources: # Resource allocation
             requests:
               cpu: 1m
               memory: 50Mi
             limits:
               cpu: 100m
               memory: 256Mi
-          startupProbe:
+          startupProbe: # Initial health check
             httpGet:
               path: /health
               port: 3000
             failureThreshold: 5
             initialDelaySeconds: 20
             periodSeconds: 10
-          readinessProbe:
+          readinessProbe: # Ready status probe
             httpGet:
               path: /health
               port: 3000
             failureThreshold: 3
             initialDelaySeconds: 3
             periodSeconds: 5
-          livenessProbe:
+          livenessProbe: # Ongoing health check
             httpGet:
               path: /health
               port: 3000
             failureThreshold: 5
             initialDelaySeconds: 3
             periodSeconds: 3
-      initContainers:
+      initContainers: # Initialization container to wait for RabbitMQ
         - name: wait-for-rabbitmq
           image: busybox
           command:
@@ -201,7 +201,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: order-service-bestbuy
+  name: order-service
 spec:
   type: ClusterIP
   ports:
@@ -209,33 +209,33 @@ spec:
       port: 3000
       targetPort: 3000
   selector:
-    app: order-service-bestbuy
+    app: order-service
 ---
 # Deployment for Makeline Service
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: makeline-service-bestbuy
+  name: makeline-service
 spec:
-  replicas: 1
+  replicas: 1 # Single replica
   selector:
     matchLabels:
-      app: makeline-service-bestbuy
+      app: makeline-service
   template:
     metadata:
       labels:
-        app: makeline-service-bestbuy
+        app: makeline-service
     spec:
       nodeSelector:
         "kubernetes.io/os": linux
       containers:
-        - name: makeline-service-bestbuy
-          image: serpild/makeline-service:latest  # Update image to your custom image
+        - name: makeline-service
+          image: serpild/makeline-service-l8:latest # Custom Makeline service image
           ports:
-            - containerPort: 3001
-          env:
+            - containerPort: 3001 # Makeline service listens on this port
+          env: # Environment variables for configuration
             - name: ORDER_QUEUE_URI
-              value: "amqp://rabbitmq:5672"
+              value: "amqp://rabbitmq:5672" # RabbitMQ connection string
             - name: ORDER_QUEUE_USERNAME
               value: "username"
             - name: ORDER_QUEUE_PASSWORD
@@ -243,32 +243,32 @@ spec:
             - name: ORDER_QUEUE_NAME
               value: "orders"
             - name: ORDER_DB_URI
-              value: "mongodb://mongodb:27017"
+              value: "mongodb://mongodb:27017" # MongoDB connection string
             - name: ORDER_DB_NAME
-              value: "orderdb"
+              value: "orderdb" # Database name
             - name: ORDER_DB_COLLECTION_NAME
-              value: "orders"
-          resources:
+              value: "orders" # Collection name
+          resources: # Resource requests and limits
             requests:
               cpu: 1m
               memory: 6Mi
             limits:
               cpu: 5m
               memory: 20Mi
-          startupProbe:
+          startupProbe: # Initial health check
             httpGet:
               path: /health
               port: 3001
             failureThreshold: 10
             periodSeconds: 5
-          readinessProbe:
+          readinessProbe: # Ready status probe
             httpGet:
               path: /health
               port: 3001
             failureThreshold: 3
             initialDelaySeconds: 3
             periodSeconds: 5
-          livenessProbe:
+          livenessProbe: # Ongoing health check
             httpGet:
               path: /health
               port: 3001
@@ -280,56 +280,56 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: makeline-service-bestbuy
+  name: makeline-service
 spec:
-  type: ClusterIP
+  type: ClusterIP # Internal cluster service
   ports:
     - name: http
-      port: 3001
+      port: 3001 # Service port
       targetPort: 3001
   selector:
-    app: makeline-service-bestbuy
+    app: makeline-service
 ---
 # Deployment for Product Service
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: product-service-bestbuy
+  name: product-service
 spec:
-  replicas: 1
+  replicas: 1 # Single replica
   selector:
     matchLabels:
-      app: product-service-bestbuy
+      app: product-service
   template:
     metadata:
       labels:
-        app: product-service-bestbuy
+        app: product-service
     spec:
       nodeSelector:
         "kubernetes.io/os": linux
       containers:
-        - name: product-service-bestbuy
-          image: serpild/product-service:latest  # Update image to your custom image
+        - name: product-service
+          image: serpild/product-service-l8:latest # Custom product service image
           ports:
-            - containerPort: 3002
-          env:
+            - containerPort: 3002 # Product service listens on this port
+          env: # Environment variables for configuration
             - name: AI_SERVICE_URL
-              value: "http://ai-service:5001/"
-          resources:
+              value: "http://ai-service:5001/" # URL for AI service integration
+          resources: # Resource requests and limits
             requests:
               cpu: 1m
               memory: 1Mi
             limits:
               cpu: 2m
               memory: 20Mi
-          readinessProbe:
+          readinessProbe: # Ready status probe
             httpGet:
               path: /health
               port: 3002
             failureThreshold: 3
             initialDelaySeconds: 3
             periodSeconds: 5
-          livenessProbe:
+          livenessProbe: # Ongoing health check
             httpGet:
               path: /health
               port: 3002
@@ -341,13 +341,73 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: product-service-bestbuy
+  name: product-service
 spec:
   type: ClusterIP
   ports:
     - name: http
-      port: 3002
-      targetPort:
+      port: 3002 # Service port
+      targetPort: 3002
+  selector:
+    app: product-service
+---
+# Deployment for Store Front
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: store-front
+  template:
+    metadata:
+      labels:
+        app: store-front
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+        - name: store-front
+          image: serpild/store-front-l8:latest # Front-end store application
+          ports:
+            - containerPort: 8080 # Front-end app port
+              name: store-front
+          env: # Environment variables for backend URLs
+            - name: VUE_APP_ORDER_SERVICE_URL
+              value: "http://order-service:3000/"
+            - name: VUE_APP_PRODUCT_SERVICE_URL
+              value: "http://product-service:3002/"
+          resources: # Resource requests and limits
+            requests:
+              cpu: 1m
+              memory: 200Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+          startupProbe: # Initial health check
+            httpGet:
+              path: /health
+              port: 8080
+            failureThreshold: 3
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          readinessProbe: # Ready status probe
+            httpGet:
+              path: /health
+              port: 8080
+            failureThreshold: 3
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          livenessProbe: # Ongoing health check
+            httpGet:
+              path: /health
+              port: 8080
+            failureThreshold: 5
+            initialDelaySeconds: 3
+            periodSeconds: 3
+---
 # Service for Store Front
 apiVersion: v1
 kind: Service
@@ -380,7 +440,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: store-admin
-          image: serpild/store-admin:latest # Admin interface for store
+          image: serpild/store-admin-l8:latest # Admin interface for store
           ports:
             - containerPort: 8081 # Admin app port
               name: store-admin
@@ -450,7 +510,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: ai-service
-          image: serpild/ai-service:latest
+          image: serpild/ai-service-l8:latest
           ports:
             - containerPort: 5001
           env:
@@ -459,13 +519,13 @@ spec:
             - name: AZURE_OPENAI_API_VERSION
               value: "2024-07-01-preview"
             - name: AZURE_OPENAI_DEPLOYMENT_NAME # required if using Azure OpenAI
-              value: "gpt-4"
+              value: ""
             - name: AZURE_OPENAI_ENDPOINT # required if using Azure OpenAI
-              value: "https://bestbuyopenai.openai.azure.com/"
+              value: ""
             - name: AZURE_OPENAI_DALLE_ENDPOINT
-              value: "https://bestbuyopenai.openai.azure.com/"
+              value: ""
             - name: AZURE_OPENAI_DALLE_DEPLOYMENT_NAME
-              value: "dall-e-3"
+              value: ""
             - name: OPENAI_API_KEY # always required
               valueFrom:
                 secretKeyRef:
@@ -513,4 +573,3 @@ spec:
       targetPort: 5001
   selector:
     app: ai-service
-

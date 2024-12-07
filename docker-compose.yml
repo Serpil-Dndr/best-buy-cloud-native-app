@@ -58,21 +58,7 @@ services:
     environment:
       - PORT=5000
 
-  # Virtual Worker Service
-  virtual-worker:
-    image: "serpild/virtual-worker"
-    ports:
-      - "6000:6000" # Specify the correct port if needed
-    environment:
-      - PORT=6000
-
-  # Virtual Customer Service
-  virtual-customer:
-    image: "serpild/virtual-customer"
-    ports:
-      - "7100:7000" # Specify the correct port if needed
-    environment:
-      - PORT=7000
+ 
 
   # Store Admin Service
   store-admin:
