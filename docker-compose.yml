@@ -42,28 +42,5 @@ services:
       - order-service
       - product-service
 
-  # AI Service
-  ai-service:
-    image: "serpild/ai-service"
-    ports:
-      - "4000:4000" # Specify the correct port if needed
-    environment:
-      - PORT=4000
-
-  # Makeline Service
-  makeline-service:
-    image: "serpild/makeline-service"
-    ports:
-      - "5001:5000" # Specify the correct port if needed
-    environment:
-      - PORT=5000
-
  
 
-  # Store Admin Service
-  store-admin:
-    image: "serpild/store-admin"
-    ports:
-      - "8080:8080" # Specify the correct port if needed
-    environment:
-      - PORT=8080
