@@ -29,7 +29,7 @@ This cloud-native application is designed to demonstrate a scalable and AI-integ
 ### 3. Application and Architecture Explanation
 
 The application follows a microservices-based architecture, with each service handling a specific business functionality. The services communicate via HTTP, and MongoDB is used for storing product and order information. Kubernetes manages the deployment, scaling, and configuration of all services.
-## Architecture
+#### Architecture
 
 
 ![architecture](architecture-best-buy.png)
