@@ -18,14 +18,15 @@ This application is inspired by Azure Kubernetes Service (AKS) quickstart demo [
 ## Table of Microservice Repositories:
 
 The application has the following services: 
-| Service                 | Description                                    | Github Repo                                                      |
-|-------------------------|------------------------------------------------|-------------------------------------------------------------------|
-| `store-front-bestbuy`    | Web app for customers to place orders (Vue.js) | [store-front-bestbuy] (https://github.com/Serpil-Dndr/store-front-best-buy.git) |
-| `product-service-bestbuy`| Service to manage products for Best Buy        | [product-service-bestbuy](https://github.com/Serpil-Dndr/product-service-best-buy.git) |
-| `order-service-bestbuy`  | Service to handle orders for Best Buy          | [order-service-bestbuy](https://github.com/Serpil-Dndr/order-service-best-buy.git) |
-| `store-admin-bestbuy`    | Admin interface to manage Best Buy products    | [store-admin-bestbuy](https://github.com/Serpil-Dndr/store-admin-best-buy.git) |
-| `ai-service-bestbuy`     | AI service to generate product descriptions and images | [ai-service-bestbuy](https://github.com/Serpil-Dndr/ai-service-best-buy.git) |
-| `makeline-service-bestbuy`| Service to manage product assembly lines for Best Buy | [makeline-service-bestbuy](https://github.com/Serpil-Dndr/makeline-service-best-buy.git) |
+| Service                  | Description                                    | GitHub Repo                                                                                      |
+|--------------------------|------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| `store-front-bestbuy`    | Web app for customers to place orders (Vue.js) | [store-front-bestbuy](https://github.com/Serpil-Dndr/store-front-best-buy.git)                   |
+| `product-service-bestbuy`| Service to manage products for Best Buy        | [product-service-bestbuy](https://github.com/Serpil-Dndr/product-service-best-buy.git)           |
+| `order-service-bestbuy`  | Service to handle orders for Best Buy          | [order-service-bestbuy](https://github.com/Serpil-Dndr/order-service-best-buy.git)               |
+| `store-admin-bestbuy`    | Admin interface to manage Best Buy products    | [store-admin-bestbuy](https://github.com/Serpil-Dndr/store-admin-best-buy.git)                   |
+| `ai-service-bestbuy`     | AI service to generate product descriptions and images | [ai-service-bestbuy](https://github.com/Serpil-Dndr/ai-service-best-buy.git)                     |
+| `makeline-service-bestbuy`| Service to manage product assembly lines for Best Buy | [makeline-service-bestbuy](https://github.com/Serpil-Dndr/makeline-service-best-buy.git)         |
+
 
 
 
