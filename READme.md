@@ -12,7 +12,7 @@
 
 ---
 
-## 1. Application Overview
+### 1. Application Overview
 This cloud-native application is designed to demonstrate a scalable and AI-integrated solution for Best Buy's online store. The application is built using a microservices architecture, deployed in a Kubernetes cluster, and features AI-powered product descriptions and image generation using GPT-4 and DALL-E.
 
 ### 2.Components:
@@ -26,7 +26,7 @@ This cloud-native application is designed to demonstrate a scalable and AI-integ
 
 
 ---
-## 3. Application and Architecture Explanation
+### 3. Application and Architecture Explanation
 
 The application follows a microservices-based architecture, with each service handling a specific business functionality. The services communicate via HTTP, and MongoDB is used for storing product and order information. Kubernetes manages the deployment, scaling, and configuration of all services.
 ## Architecture
@@ -34,7 +34,7 @@ The application follows a microservices-based architecture, with each service ha
 
 ![architecture](architecture-best-buy.png)
 
-## 4.Deployment Instructions
+### 4.Deployment Instructions
 
 
 1. Clone all microservice repositories:
@@ -43,7 +43,7 @@ The application follows a microservices-based architecture, with each service ha
 
    ```
 
-## Table of Microservice Repositories:
+#### Table of Microservice Repositories:
 
 The application has the following services: 
 | Service                  | Description                                    | GitHub Repo                                                                                      |
@@ -66,7 +66,7 @@ docker push <username>/<service-name>:latest
 ```
 
 
-### Docker Images Table
+#### Docker Images Table
 
 A table listing all Docker images you created, including their names and links to their Docker Hub repositories.
 
@@ -149,7 +149,7 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
 
 4. **Deploy the Resource**:
    - Click **Review + Create** and then **Create** to deploy the Azure OpenAI service.
-### Deploy the GPT-4 and DALL-E 3 Models
+#### Deploy the GPT-4 and DALL-E 3 Models
 
 1. **Access the Azure OpenAI Resource**:
    - Navigate to the Azure OpenAI resource you just created.
@@ -167,7 +167,7 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
    - Once deployed, note down the following details for each model:
      - Deployment Name
      - Endpoint URL
-### Retrieve and Configure API Keys
+#### Retrieve and Configure API Keys
 
 1. **Get API Keys**:
    - Go to the **Keys and Endpoints** section of your Azure OpenAI resource.
@@ -182,7 +182,7 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
 
 ---
 
-## 9.  Deploy the ConfigMaps and Secrets
+### 9.  Deploy the ConfigMaps and Secrets
  - Navigate to the `Deployment Files` folder
  - This folder contains YAML files for deploying all necessary Kubernetes resources, including services, deployments, StatefulSets, ConfigMaps, and Secrets.
 - Deploy the ConfigMap for RabbitMQ Plugins:
@@ -200,7 +200,7 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
    kubectl get secrets
    ```
    ---
-## 10. Deploy the Application
+### 10. Deploy the Application
    
 ```bash
 
