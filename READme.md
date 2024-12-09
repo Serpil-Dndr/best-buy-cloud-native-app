@@ -84,6 +84,50 @@ A table listing all Docker images you created, including their names and links t
 
 ### Create a Kubernetes Cluster
 Before applying the deployment files, ensure you have a Kubernetes cluster set up. You can create a Kubernetes cluster on Azure Kubernetes Service (AKS) with the following command:
+1. **Log in to Azure Portal:**
+   - Go to [https://portal.azure.com](https://portal.azure.com) and log in with your Azure account.
+
+2. **Create a Resource Group:**
+   - In the Azure Portal, search for **Resource Groups** in the search bar.
+   - Click **Create** and fill in the following:
+     - **Resource group name**: `AlgonquinPetStoreRG`
+     - **Region**: `Canada`.
+   - Click **Review + Create** and then **Create**.
+
+3. **Create an AKS Cluster:**
+   - In the search bar, type **Kubernetes services** and click on it.
+   - Click **Create** and select **Kubernetes cluster**
+   - In the `Basics` tap fill in the following details:
+     - **Subscription**: Select your subscription.
+     - **Resource group**: Choose `AlgonquinPetStoreRG`.
+     - **Cluster preset configuration**: Choose `Dev/Test`.
+     - **Kubernetes cluster name**: `AlgonquinPetStoreCluster`.
+     - **Region**: Same as your resource group (e.g., `Canada`).
+     - **Availability zones**: `None`.
+     - **AKS pricing tier**: `Free`.
+     - **Kubernetes version**: `Default`.
+     - **Automatic upgrade**: `Disabled`.
+     - **Automatic upgrade scheduler**: `No schedule`.
+     - **Node security channel type**: `None`.
+     - **Security channel scheduler**: `No schedule`.
+     - **Authentication and Authorization**: `Local accounts with Kubernetes RBAC`.
+     - In the `Node pools` tap fill in the following details:
+     - Select **agentpool**. Optionally change its name to `masterpool`. This nodes will have the controlplane.
+        - Set **node size** to `D2as_v4`.
+        - **Scale method**: `Manual`
+        - **Node count**: `1`
+        - Click `update`
+     - Click on **Add node pool**:
+        - **Node pool name**: `workerspool`.
+        - **Mode**: `User` 
+        - Set **node size** to `D2as_v4`.
+        - **Scale method**: `Manual`
+        - **Node count**: `2`
+        - Comment: Accounttan dolayi 1 olarak sec subscription duzeldigi zaman 2 olarak create olabilir
+        - Click `add`
+   - Click **Review + Create**, and then **Create**. The deployment will take a few minutes.
+   - After that, click "Connect",and select Azure CLI  then copy the command provided and paste it into your terminal to connect to the cluster.
+
 
 ```bash
 # Create an AKS cluster
@@ -172,3 +216,11 @@ After the deployment is complete, you can access the application using the follo
 - Access the Store Admin app at the external IP on port 80.
 
 
+## Issues and Limitations 
+- Current implementation does not include extensive logging and monitoring.
+- AI-generated images may take longer depending on API response times.
+- As a macOS user, the Docker image format must be compatible with macOS architecture (ARM). When building and pushing Docker images, ensure the image is built in the correct format for your system to avoid compatibility issues.
+  - To specify the architecture, you can use the `--platform` flag when building the Docker image:
+    ```bash
+    docker build --platform linux/amd64 -t <username>/<service-name>:latest .
+    ```
