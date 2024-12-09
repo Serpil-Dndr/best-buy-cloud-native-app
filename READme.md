@@ -60,7 +60,7 @@ The application has the following services:
 
 Follow these steps to deploy the application in a Kubernetes cluster:
 
-### 1. Build Docker Images for Each Service
+###  Build Docker Images for Each Service
 For each microservice, build the Docker image and push it to Docker Hub.
 
 ```bash
@@ -82,11 +82,84 @@ A table listing all Docker images you created, including their names and links t
 | Store-Admin           | [https://hub.docker.com/repository/docker/serpild/store-admin/general](https://hub.docker.com/repository/docker/serpild/store-admin-l8/general) |
 | AI-Service            | [https://hub.docker.com/repository/docker/serpild/ai-service-l8/general](https://hub.docker.com/repository/docker/serpild/ai-service-l8/general) |
 
+### Create a Kubernetes Cluster
+Before applying the deployment files, ensure you have a Kubernetes cluster set up. You can create a Kubernetes cluster on Azure Kubernetes Service (AKS) with the following command:
+
+```bash
+# Create an AKS cluster
+az aks create --resource-group <resource-group-name> --name <aks-cluster-name> --node-count 1 --enable-addons monitoring --generate-ssh-keys
 
 
-## Apply Kubernetes Manifest Files
-Once the Docker images are pushed to Docker Hub, apply the Kubernetes deployment files.
+```
+###  Create an Azure OpenAI Service Instance
 
+1. **Navigate to Azure Portal**:
+   - Go to the [Azure Portal](https://portal.azure.com/).
+
+2. **Create a Resource**:
+   - Select **Create a Resource** from the Azure portal dashboard.
+   - Search for **Azure OpenAI** in the marketplace.
+
+3. **Set Up the Azure OpenAI Resource**:
+   - Choose the **East US** region for deployment to ensure capacity for GPT-4 and DALL-E 3 models.
+   - Fill in the required details:
+     - Resource group: Use an existing one or create a new group.
+     - Pricing tier: Select `Standard`.
+
+4. **Deploy the Resource**:
+   - Click **Review + Create** and then **Create** to deploy the Azure OpenAI service.
+### Deploy the GPT-4 and DALL-E 3 Models
+
+1. **Access the Azure OpenAI Resource**:
+   - Navigate to the Azure OpenAI resource you just created.
+
+2. **Deploy GPT-4**:
+   - Go to the **Model Deployments** section and click **Add Deployment**.
+   - Choose **GPT-4** as the model and provide a deployment name (e.g., `gpt-4-deployment`).
+   - Set the deployment configuration as required and deploy the model.
+
+3. **Deploy DALL-E 3**:
+   - Repeat the same process to deploy **DALL-E 3**.
+   - Use a descriptive deployment name (e.g., `dalle-3-deployment`).
+
+4. **Note Configuration Details**:
+   - Once deployed, note down the following details for each model:
+     - Deployment Name
+     - Endpoint URL
+### Retrieve and Configure API Keys
+
+1. **Get API Keys**:
+   - Go to the **Keys and Endpoints** section of your Azure OpenAI resource.
+   - Copy the **API Key (API key 1)** and **Endpoint URL**.
+
+2. **Base64 Encode the API Key**:
+   - Use the following command to Base64 encode your API key:
+     ```bash
+     echo -n "<your-api-key>" | base64
+     ```
+   - Replace `<your-api-key>` with your actual API key.
+
+---
+
+##  Deploy the ConfigMaps and Secrets
+ - Navigate to the `Deployment Files` folder
+ - This folder contains YAML files for deploying all necessary Kubernetes resources, including services, deployments, StatefulSets, ConfigMaps, and Secrets.
+- Deploy the ConfigMap for RabbitMQ Plugins:
+   ```bash
+   kubectl apply -f config-maps.yaml
+   ```
+- Create and Deploy the Secret for OpenAI API:  
+   - Make sure that you have replaced Base64-encoded-API-KEY in secrets.yaml with your Base64-encoded OpenAI API key.
+   ```bash
+   kubectl apply -f secrets.yaml
+   ```
+- Verify:
+   ```bash
+   kubectl get configmaps
+   kubectl get secrets
+   ```
+##  Deploy the Application
+   
 ```bash
 
 kubectl apply -f  best-buy.yaml
@@ -94,7 +167,8 @@ kubectl apply -f  best-buy.yaml
 ```
 
 ### Access the Application
-After the deployment is complete, you can access the application using the following URLs:
+After the deployment is complete, you can access the application using the following;
+- Access the Store Front app at the external IP on port 80.
+- Access the Store Admin app at the external IP on port 80.
 
-- **Store-Front**: `http://<load-balancer-ip>:3000`
-- **Store-Admin**: `http://<load-balancer-ip>:3001`
+
