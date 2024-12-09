@@ -123,7 +123,6 @@ Before applying the deployment files, ensure you have a Kubernetes cluster set u
         - Set **node size** to `D2as_v4`.
         - **Scale method**: `Manual`
         - **Node count**: `2`
-        - Comment: Accounttan dolayi 1 olarak sec subscription duzeldigi zaman 2 olarak create olabilir
         - Click `add`
    - Click **Review + Create**, and then **Create**. The deployment will take a few minutes.
    - After that, click "Connect",and select Azure CLI  then copy the command provided and paste it into your terminal to connect to the cluster.
