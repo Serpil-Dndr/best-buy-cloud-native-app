@@ -35,7 +35,7 @@ The application follows a microservices-based architecture, with each service ha
 ![architecture](architecture-best-buy.png)
 
 ## 4.Deployment Instructions
-Follow these steps to deploy the application in a Kubernetes cluster:
+
 
 1. Clone all microservice repositories:
    ```bash
@@ -43,7 +43,7 @@ Follow these steps to deploy the application in a Kubernetes cluster:
 
    ```
 
-## 5.Table of Microservice Repositories:
+## Table of Microservice Repositories:
 
 The application has the following services: 
 | Service                  | Description                                    | GitHub Repo                                                                                      |
@@ -56,11 +56,8 @@ The application has the following services:
 | `makeline-service-bestbuy`| Service to manage product assembly lines for Best Buy | [makeline-service-bestbuy](https://github.com/Serpil-Dndr/makeline-service-best-buy.git)         |
 
 
-## 6.Deployment Instructions
 
-Follow these steps to deploy the application in a Kubernetes cluster:
-
-###  Build Docker Images for Each Service
+### 5. Build Docker Images for Each Service
 For each microservice, build the Docker image and push it to Docker Hub.
 
 ```bash
