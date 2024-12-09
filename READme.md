@@ -134,6 +134,7 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
 
 
 ```
+---
 ###  Create an Azure OpenAI Service Instance
 
 1. **Navigate to Azure Portal**:
@@ -201,6 +202,7 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
    kubectl get configmaps
    kubectl get secrets
    ```
+   ---
 ##  Deploy the Application
    
 ```bash
@@ -208,12 +210,12 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
 kubectl apply -f  best-buy.yaml
 
 ```
-
+---
 ### Access the Application
 After the deployment is complete, you can access the application using the following;
 - Access the Store Front app at the external IP on port 80.
 - Access the Store Admin app at the external IP on port 80.
-
+---
 
 ## Issues and Limitations 
 - Current implementation does not include extensive logging and monitoring.
