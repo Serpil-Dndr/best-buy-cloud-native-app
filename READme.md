@@ -214,7 +214,7 @@ After the deployment is complete, you can access the application using the follo
 - Access the Store Admin app at the external IP on port 80.
 ---
 
-## 12. Issues and Limitations 
+### 12. Issues and Limitations 
 - Current implementation does not include extensive logging and monitoring.
 - AI-generated images may take longer depending on API response times.
 - As a macOS user, the Docker image format must be compatible with macOS architecture (ARM). When building and pushing Docker images, ensure the image is built in the correct format for your system to avoid compatibility issues.
