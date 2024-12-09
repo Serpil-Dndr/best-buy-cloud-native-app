@@ -136,7 +136,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: order-service
-          image: order-service-l8:latest # Custom image for order service
+          image: serpild/order-service:latest # Custom image for order service
           ports:
             - containerPort: 3000 # Order service listens on this port
           env: # Environment variables for configuration
@@ -230,7 +230,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: makeline-service
-          image: makeline-service-l8:latest # Custom Makeline service image
+          image: serpild/makeline-service  # Custom Makeline service image
           ports:
             - containerPort: 3001 # Makeline service listens on this port
           env: # Environment variables for configuration
@@ -309,7 +309,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: product-service
-          image: product-service-l8:latest # Custom product service image
+          image: serpild/product-service  # Custom product service image
           ports:
             - containerPort: 3002 # Product service listens on this port
     
@@ -368,7 +368,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: store-front
-          image: store-front-l8:latest # Front-end store application
+          image: serpild/store-front:latest # Front-end store application
           ports:
             - containerPort: 8080 # Front-end app port
               name: store-front
@@ -438,7 +438,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: store-admin
-          image: store-admin-l8:latest # Admin interface for store
+          image: serpild/store-admin # Admin interface for store
           ports:
             - containerPort: 8081 # Admin app port
               name: store-admin
