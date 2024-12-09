@@ -77,7 +77,7 @@ A table listing all Docker images you created, including their names and links t
 | Product-Service       | [https://hub.docker.com/repository/docker/serpild/product-service/general](https://hub.docker.com/repository/docker/serpild/product-service-l8/general) |
 | Makeline-Service      | [https://hub.docker.com/repository/docker/serpild/makeline-service/general](https://hub.docker.com/repository/docker/serpild/makeline-service-l8/general) |
 | Store-Admin           | [https://hub.docker.com/repository/docker/serpild/store-admin/general](https://hub.docker.com/repository/docker/serpild/store-admin-l8/general) |
-| AI-Service            | [https://hub.docker.com/repository/docker/serpild/ai-service-l8/general](https://hub.docker.com/repository/docker/serpild/ai-service-l8/general) |
+| AI-Service            | [https://hub.docker.com/repository/docker/serpild/ai-service-l8/general](https://hub.docker.com/repository/docker/serpild/ai-service/general) |
 
 ### 7.  Create a Kubernetes Cluster
 Before applying the deployment files, ensure you have a Kubernetes cluster set up. You can create a Kubernetes cluster on Azure Kubernetes Service (AKS) with the following command:
