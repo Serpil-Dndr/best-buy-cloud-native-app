@@ -69,7 +69,7 @@ docker push <username>/<service-name>:latest
 ```
 
 
-## Docker Images Table
+### Docker Images Table
 
 A table listing all Docker images you created, including their names and links to their Docker Hub repositories.
 
