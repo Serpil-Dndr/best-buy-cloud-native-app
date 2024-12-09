@@ -12,10 +12,10 @@
 
 ---
 
-## Application Overview
+## 1. Application Overview
 This cloud-native application is designed to demonstrate a scalable and AI-integrated solution for Best Buy's online store. The application is built using a microservices architecture, deployed in a Kubernetes cluster, and features AI-powered product descriptions and image generation using GPT-4 and DALL-E.
 
-### Components:
+### 2.Components:
 - **Store-Front**: Customer-facing web app for browsing products and placing orders.
 - **Store-Admin**: Employee-facing admin app for managing product data and viewing orders.
 - **Order-Service**: Handles order creation and sends order data to the managed queue (Azure Service Bus).
@@ -26,7 +26,7 @@ This cloud-native application is designed to demonstrate a scalable and AI-integ
 
 
 ---
-## Application and Architecture Explanation
+## 3. Application and Architecture Explanation
 
 The application follows a microservices-based architecture, with each service handling a specific business functionality. The services communicate via HTTP, and MongoDB is used for storing product and order information. Kubernetes manages the deployment, scaling, and configuration of all services.
 ## Architecture
@@ -34,7 +34,7 @@ The application follows a microservices-based architecture, with each service ha
 
 ![architecture](architecture-best-buy.png)
 
-## Deployment Instructions
+## 4.Deployment Instructions
 Follow these steps to deploy the application in a Kubernetes cluster:
 
 1. Clone all microservice repositories:
@@ -43,7 +43,7 @@ Follow these steps to deploy the application in a Kubernetes cluster:
 
    ```
 
-## Table of Microservice Repositories:
+## 5.Table of Microservice Repositories:
 
 The application has the following services: 
 | Service                  | Description                                    | GitHub Repo                                                                                      |
@@ -56,7 +56,7 @@ The application has the following services:
 | `makeline-service-bestbuy`| Service to manage product assembly lines for Best Buy | [makeline-service-bestbuy](https://github.com/Serpil-Dndr/makeline-service-best-buy.git)         |
 
 
-## Deployment Instructions
+## 6.Deployment Instructions
 
 Follow these steps to deploy the application in a Kubernetes cluster:
 
@@ -82,7 +82,7 @@ A table listing all Docker images you created, including their names and links t
 | Store-Admin           | [https://hub.docker.com/repository/docker/serpild/store-admin/general](https://hub.docker.com/repository/docker/serpild/store-admin-l8/general) |
 | AI-Service            | [https://hub.docker.com/repository/docker/serpild/ai-service-l8/general](https://hub.docker.com/repository/docker/serpild/ai-service-l8/general) |
 
-### Create a Kubernetes Cluster
+### 7.  Create a Kubernetes Cluster
 Before applying the deployment files, ensure you have a Kubernetes cluster set up. You can create a Kubernetes cluster on Azure Kubernetes Service (AKS) with the following command:
 1. **Log in to Azure Portal:**
    - Go to [https://portal.azure.com](https://portal.azure.com) and log in with your Azure account.
@@ -135,7 +135,7 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
 
 ```
 ---
-###  Create an Azure OpenAI Service Instance
+### 8. Create an Azure OpenAI Service Instance
 
 1. **Navigate to Azure Portal**:
    - Go to the [Azure Portal](https://portal.azure.com/).
@@ -185,7 +185,7 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
 
 ---
 
-##  Deploy the ConfigMaps and Secrets
+## 9.  Deploy the ConfigMaps and Secrets
  - Navigate to the `Deployment Files` folder
  - This folder contains YAML files for deploying all necessary Kubernetes resources, including services, deployments, StatefulSets, ConfigMaps, and Secrets.
 - Deploy the ConfigMap for RabbitMQ Plugins:
@@ -203,7 +203,7 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
    kubectl get secrets
    ```
    ---
-##  Deploy the Application
+## 10. Deploy the Application
    
 ```bash
 
@@ -211,13 +211,13 @@ kubectl apply -f  best-buy.yaml
 
 ```
 ---
-### Access the Application
+### 11. Access the Application
 After the deployment is complete, you can access the application using the following;
 - Access the Store Front app at the external IP on port 80.
 - Access the Store Admin app at the external IP on port 80.
 ---
 
-## Issues and Limitations 
+## 12. Issues and Limitations 
 - Current implementation does not include extensive logging and monitoring.
 - AI-generated images may take longer depending on API response times.
 - As a macOS user, the Docker image format must be compatible with macOS architecture (ARM). When building and pushing Docker images, ensure the image is built in the correct format for your system to avoid compatibility issues.
