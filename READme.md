@@ -72,12 +72,12 @@ A table listing all Docker images you created, including their names and links t
 
 | Service               | Docker Image Link                                                    |
 |-----------------------|----------------------------------------------------------------------|
-| Store-Front           | [https://hub.docker.com/repository/docker/serpild/store-front/general](https://hub.docker.com/repository/docker/serpild/store-front-l8/general) |
-| Order-Service         | [https://hub.docker.com/repository/docker/serpild/order-service/general](https://hub.docker.com/repository/docker/serpild/order-service-l8/general) |
-| Product-Service       | [https://hub.docker.com/repository/docker/serpild/product-service/general](https://hub.docker.com/repository/docker/serpild/product-service-l8/general) |
-| Makeline-Service      | [https://hub.docker.com/repository/docker/serpild/makeline-service/general](https://hub.docker.com/repository/docker/serpild/makeline-service-l8/general) |
-| Store-Admin           | [https://hub.docker.com/repository/docker/serpild/store-admin/general](https://hub.docker.com/repository/docker/serpild/store-admin-l8/general) |
-| AI-Service            | [https://hub.docker.com/repository/docker/serpild/ai-service-l8/general](https://hub.docker.com/repository/docker/serpild/ai-service/general) |
+| Store-Front           | [Store-front](https://hub.docker.com/repository/docker/serpild/store-front-l8/general) |
+| Order-Service         | [Order-service](https://hub.docker.com/repository/docker/serpild/order-service-l8/general) |
+| Product-Service       | [Product-service](https://hub.docker.com/repository/docker/serpild/product-service-l8/general) |
+| Makeline-Service      | [Makeline-service](https://hub.docker.com/repository/docker/serpild/makeline-service-l8/general) |
+| Store-Admin           | [Store-admin](https://hub.docker.com/repository/docker/serpild/store-admin-l8/general) |
+| AI-Service            | [Ai-service](https://hub.docker.com/repository/docker/serpild/ai-service/general) |
 
 ### 7.  Create a Kubernetes Cluster
 Before applying the deployment files, ensure you have a Kubernetes cluster set up. You can create a Kubernetes cluster on Azure Kubernetes Service (AKS) with the following command:
