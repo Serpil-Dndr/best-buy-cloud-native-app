@@ -1,19 +1,47 @@
-# Cloud-Native App for Best Buy
-Welcome to the **Best Buy Store ** application.
+# Best Buy Cloud-Native App
 
-This sample demo app consists of a group of containerized microservices that can be easily deployed into a Kubernetes cluster. It demonstrates a realistic scenario using a polyglot architecture, event-driven design, and common open-source back-end services (e.g., RabbitMQ, MongoDB). The application also integrates OpenAI's models to generate product descriptions and recommendations. This functionality can utilize either [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/overview) or [OpenAI](https://openai.com/).
-
-This application is inspired by Azure Kubernetes Service (AKS) quickstart demo [Azure Kubernetes Service (AKS) Docs](https://learn.microsoft.com/en-us/azure/aks/).
-
-> [!NOTE]
-> This is not intended as an example of production-ready code but rather a demonstration of a realistic application running in Kubernetes.
+## Table of Contents
+- [Application Overview](#application-overview)
+- [Updated Architecture Diagram](#updated-architecture-diagram)
+- [Application and Architecture Explanation](#application-and-architecture-explanation)
+- [Deployment Instructions](#deployment-instructions)
+- [Microservice Repositories](#microservice-repositories)
+- [Docker Images](#docker-images)
+- [Demo Video](#demo-video)
+- [Issues and Limitations](#issues-and-limitations)
 
 ---
 
+## Application Overview
+This cloud-native application is designed to demonstrate a scalable and AI-integrated solution for Best Buy's online store. The application is built using a microservices architecture, deployed in a Kubernetes cluster, and features AI-powered product descriptions and image generation using GPT-4 and DALL-E.
+
+### Components:
+- **Store-Front**: Customer-facing web app for browsing products and placing orders.
+- **Store-Admin**: Employee-facing admin app for managing product data and viewing orders.
+- **Order-Service**: Handles order creation and sends order data to the managed queue (Azure Service Bus).
+- **Product-Service**: CRUD operations for product data.
+- **Makeline-Service**: Processes orders by consuming messages from the queue.
+- **AI-Service**: AI-generated product descriptions and images using GPT-4 and DALL-E.
+- **Database**: MongoDB for storing order and product data.
+
+
+---
+## Application and Architecture Explanation
+
+The application follows a microservices-based architecture, with each service handling a specific business functionality. The services communicate via HTTP, and MongoDB is used for storing product and order information. Kubernetes manages the deployment, scaling, and configuration of all services.
 ## Architecture
 
 
 ![architecture](architecture-best-buy.png)
+
+## Deployment Instructions
+Follow these steps to deploy the application in a Kubernetes cluster:
+
+1. Clone all microservice repositories:
+   ```bash
+   git clone https://github.com/Serpil-Dndr/best-buy-cloud-native-app.git
+
+   ```
 
 ## Table of Microservice Repositories:
 
@@ -28,7 +56,17 @@ The application has the following services:
 | `makeline-service-bestbuy`| Service to manage product assembly lines for Best Buy | [makeline-service-bestbuy](https://github.com/Serpil-Dndr/makeline-service-best-buy.git)         |
 
 
+## Deployment Instructions
 
+Follow these steps to deploy the application in a Kubernetes cluster:
+
+### 1. Build Docker Images for Each Service
+For each microservice, build the Docker image and push it to Docker Hub.
+
+```bash
+docker build -t <username>/<service-name>:latest .
+docker push <username>/<service-name>:latest
+```
 
 
 ## Docker Images Table
@@ -46,4 +84,17 @@ A table listing all Docker images you created, including their names and links t
 
 
 
+## Apply Kubernetes Manifest Files
+Once the Docker images are pushed to Docker Hub, apply the Kubernetes deployment files.
 
+```bash
+
+kubectl apply -f  best-buy.yaml
+
+```
+
+### Access the Application
+After the deployment is complete, you can access the application using the following URLs:
+
+- **Store-Front**: `http://<load-balancer-ip>:3000`
+- **Store-Admin**: `http://<load-balancer-ip>:3001`
