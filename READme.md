@@ -64,7 +64,7 @@ The application has the following services:
 For each microservice, build the Docker image and push it to Docker Hub.
 
 ```bash
-docker build -t <username>/<service-name>:latest .
+docker build --platform linux/amd64 -t <username>/<service-name>:latest .
 docker push <username>/<service-name>:latest
 ```
 
