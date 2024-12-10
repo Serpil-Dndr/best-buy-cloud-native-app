@@ -16,7 +16,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: virtual-customer
-          image: serpild/virtual-customer-l8:latest  # Update image to your custom image
+          image: serpild/virtual-customer  # Update image to your custom image
           env:
             - name: ORDER_SERVICE_URL
               value: http://order-service:3000/
@@ -48,7 +48,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: virtual-worker
-          image: serpild/virtual-worker-l8:latest  # Update image to your custom image
+          image: serpild/virtual-worker  # Update image to your custom image
           env:
             - name: MAKELINE_SERVICE_URL
               value: http://makeline-service:3001

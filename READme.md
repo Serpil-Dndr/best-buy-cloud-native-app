@@ -54,6 +54,9 @@ The application has the following services:
 | `store-admin-bestbuy`    | Admin interface to manage Best Buy products    | [store-admin-bestbuy](https://github.com/Serpil-Dndr/store-admin-best-buy.git)                   |
 | `ai-service-bestbuy`     | AI service to generate product descriptions and images | [ai-service-bestbuy](https://github.com/Serpil-Dndr/ai-service-best-buy.git)                     |
 | `makeline-service-bestbuy`| Service to manage product assembly lines for Best Buy | [makeline-service-bestbuy](https://github.com/Serpil-Dndr/makeline-service-best-buy.git)         |
+| `virtual-customer-bestbuy` | Service to simulate customer interactions for Best Buy | [virtual-customer-bestbuy](https://github.com/Serpil-Dndr/virtual-customer-best-buy.git)          |
+| `virtual-worker-bestbuy` | Service to simulate worker interactions for Best Buy | [virtual-worker-bestbuy](https://github.com/Serpil-Dndr/virtual-worker-best-buy.git)             |
+
 
 
 ## 6.Deployment Instructions
@@ -75,12 +78,15 @@ A table listing all Docker images you created, including their names and links t
 
 | Service               | Docker Image Link                                                    |
 |-----------------------|----------------------------------------------------------------------|
-| Store-Front           | [https://hub.docker.com/repository/docker/serpild/store-front/general](https://hub.docker.com/repository/docker/serpild/store-front-l8/general) |
-| Order-Service         | [https://hub.docker.com/repository/docker/serpild/order-service/general](https://hub.docker.com/repository/docker/serpild/order-service-l8/general) |
-| Product-Service       | [https://hub.docker.com/repository/docker/serpild/product-service/general](https://hub.docker.com/repository/docker/serpild/product-service-l8/general) |
-| Makeline-Service      | [https://hub.docker.com/repository/docker/serpild/makeline-service/general](https://hub.docker.com/repository/docker/serpild/makeline-service-l8/general) |
-| Store-Admin           | [https://hub.docker.com/repository/docker/serpild/store-admin/general](https://hub.docker.com/repository/docker/serpild/store-admin-l8/general) |
-| AI-Service            | [https://hub.docker.com/repository/docker/serpild/ai-service-l8/general](https://hub.docker.com/repository/docker/serpild/ai-service-l8/general) |
+| Store-Front           | [serpild/store-front](https://hub.docker.com/repository/docker/serpild/store-front-l8/general) |
+| Order-Service         | [serpild/order-service](https://hub.docker.com/repository/docker/serpild/order-service-l8/general) |
+| Product-Service       | [serpild/product-service](https://hub.docker.com/repository/docker/serpild/product-service-l8/general) |
+| Makeline-Service      | [serpild/makeline-service](https://hub.docker.com/repository/docker/serpild/makeline-service-l8/general) |
+| Store-Admin           | [serpild/store-admin](https://hub.docker.com/repository/docker/serpild/store-admin-l8/general) |
+| AI-Service            | [serpild/ai-service](https://hub.docker.com/repository/docker/serpild/ai-service-l8/general) |
+| Virtual-Worker        | [serpild/virtual-worker](https://hub.docker.com/repository/docker/serpild/virtual-workerve) |
+| Virtual-Customer      | [serpild/virtual-customer](https://hub.docker.com/repository/docker/serpild/virtual-customer) |
+
 
 ### 7.  Create a Kubernetes Cluster
 Before applying the deployment files, ensure you have a Kubernetes cluster set up. You can create a Kubernetes cluster on Azure Kubernetes Service (AKS) with the following command:
@@ -206,9 +212,7 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
 ## 10. Deploy the Application
    
 ```bash
-
-kubectl apply -f  best-buy.yaml
-
+     kubectl apply -f  best-buy.yaml
 ```
 ---
 ### 11. Access the Application
