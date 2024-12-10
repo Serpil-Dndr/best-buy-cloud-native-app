@@ -212,13 +212,19 @@ kubectl apply -f  best-buy.yaml
 After the deployment is complete, you can access the application using the following;
 - Access the Store Front app at the external IP on port 80.
 - Access the Store Admin app at the external IP on port 80.
+  
 ---
+### 12. Demo Video Link
 
-### 12. Issues and Limitations 
-- Current implementation does not include extensive logging and monitoring.
-- AI-generated images may take longer depending on API response times.
-- As a macOS user, the Docker image format must be compatible with macOS architecture (ARM). When building and pushing Docker images, ensure the image is built in the correct format for your system to avoid compatibility issues.
-  - To specify the architecture, you can use the `--platform` flag when building the Docker image:
-    ```bash
-    docker build --platform linux/amd64 -t <username>/<service-name>:latest .
-    ```
+---
+### 13. Issues and Limitations 
+
+- When working on macOS, ensure that the Docker image format is compatible with your system architecture (ARM).  
+- To avoid compatibility issues, explicitly specify the target architecture when building Docker images. Use the `--platform` flag to define the platform:  
+  ```bash
+  docker build --platform linux/amd64 -t <username>/<service-name>:latest .
+  ```
+- **Subscription quota for AI deployments is limited**, allowing only **two deployment attempts**.  
+- Exceeding this limit may result in **delayed workflows** or the need for **additional subscription resources**.  
+- Plan deployments carefully to **maximize quota usage**.
+
