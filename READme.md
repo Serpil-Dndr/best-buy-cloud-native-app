@@ -12,7 +12,7 @@
 
 ---
 
-## 1. Application Overview
+### 1. Application Overview
 This cloud-native application is designed to demonstrate a scalable and AI-integrated solution for Best Buy's online store. The application is built using a microservices architecture, deployed in a Kubernetes cluster, and features AI-powered product descriptions and image generation using GPT-4 and DALL-E.
 
 ### 2.Components:
@@ -26,16 +26,16 @@ This cloud-native application is designed to demonstrate a scalable and AI-integ
 
 
 ---
-## 3. Application and Architecture Explanation
+### 3. Application and Architecture Explanation
 
 The application follows a microservices-based architecture, with each service handling a specific business functionality. The services communicate via HTTP, and MongoDB is used for storing product and order information. Kubernetes manages the deployment, scaling, and configuration of all services.
-## Architecture
+#### Architecture
 
 
 ![architecture](architecture-best-buy.png)
 
-## 4.Deployment Instructions
-Follow these steps to deploy the application in a Kubernetes cluster:
+### 4.Deployment Instructions
+
 
 1. Clone all microservice repositories:
    ```bash
@@ -43,7 +43,7 @@ Follow these steps to deploy the application in a Kubernetes cluster:
 
    ```
 
-## 5.Table of Microservice Repositories:
+#### Table of Microservice Repositories:
 
 The application has the following services: 
 | Service                  | Description                                    | GitHub Repo                                                                                      |
@@ -59,11 +59,8 @@ The application has the following services:
 
 
 
-## 6.Deployment Instructions
 
-Follow these steps to deploy the application in a Kubernetes cluster:
-
-###  Build Docker Images for Each Service
+### 5. Build Docker Images for Each Service
 For each microservice, build the Docker image and push it to Docker Hub.
 
 ```bash
@@ -72,21 +69,18 @@ docker push <username>/<service-name>:latest
 ```
 
 
-### Docker Images Table
+#### Docker Images Table
 
 A table listing all Docker images you created, including their names and links to their Docker Hub repositories.
 
 | Service               | Docker Image Link                                                    |
 |-----------------------|----------------------------------------------------------------------|
-| Store-Front           | [serpild/store-front](https://hub.docker.com/repository/docker/serpild/store-front-l8/general) |
-| Order-Service         | [serpild/order-service](https://hub.docker.com/repository/docker/serpild/order-service-l8/general) |
-| Product-Service       | [serpild/product-service](https://hub.docker.com/repository/docker/serpild/product-service-l8/general) |
-| Makeline-Service      | [serpild/makeline-service](https://hub.docker.com/repository/docker/serpild/makeline-service-l8/general) |
-| Store-Admin           | [serpild/store-admin](https://hub.docker.com/repository/docker/serpild/store-admin-l8/general) |
-| AI-Service            | [serpild/ai-service](https://hub.docker.com/repository/docker/serpild/ai-service-l8/general) |
-| Virtual-Worker        | [serpild/virtual-worker](https://hub.docker.com/repository/docker/serpild/virtual-workerve) |
-| Virtual-Customer      | [serpild/virtual-customer](https://hub.docker.com/repository/docker/serpild/virtual-customer) |
-
+| Store-Front           | [https://hub.docker.com/repository/docker/serpild/store-front/general](https://hub.docker.com/repository/docker/serpild/store-front-l8/general) |
+| Order-Service         | [https://hub.docker.com/repository/docker/serpild/order-service/general](https://hub.docker.com/repository/docker/serpild/order-service-l8/general) |
+| Product-Service       | [https://hub.docker.com/repository/docker/serpild/product-service/general](https://hub.docker.com/repository/docker/serpild/product-service-l8/general) |
+| Makeline-Service      | [https://hub.docker.com/repository/docker/serpild/makeline-service/general](https://hub.docker.com/repository/docker/serpild/makeline-service-l8/general) |
+| Store-Admin           | [https://hub.docker.com/repository/docker/serpild/store-admin/general](https://hub.docker.com/repository/docker/serpild/store-admin-l8/general) |
+| AI-Service            | [https://hub.docker.com/repository/docker/serpild/ai-service-l8/general](https://hub.docker.com/repository/docker/serpild/ai-service-l8/general) |
 
 ### 7.  Create a Kubernetes Cluster
 Before applying the deployment files, ensure you have a Kubernetes cluster set up. You can create a Kubernetes cluster on Azure Kubernetes Service (AKS) with the following command:
@@ -158,7 +152,7 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
 
 4. **Deploy the Resource**:
    - Click **Review + Create** and then **Create** to deploy the Azure OpenAI service.
-### Deploy the GPT-4 and DALL-E 3 Models
+#### Deploy the GPT-4 and DALL-E 3 Models
 
 1. **Access the Azure OpenAI Resource**:
    - Navigate to the Azure OpenAI resource you just created.
@@ -176,7 +170,7 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
    - Once deployed, note down the following details for each model:
      - Deployment Name
      - Endpoint URL
-### Retrieve and Configure API Keys
+#### Retrieve and Configure API Keys
 
 1. **Get API Keys**:
    - Go to the **Keys and Endpoints** section of your Azure OpenAI resource.
@@ -191,7 +185,7 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
 
 ---
 
-## 9.  Deploy the ConfigMaps and Secrets
+### 9.  Deploy the ConfigMaps and Secrets
  - Navigate to the `Deployment Files` folder
  - This folder contains YAML files for deploying all necessary Kubernetes resources, including services, deployments, StatefulSets, ConfigMaps, and Secrets.
 - Deploy the ConfigMap for RabbitMQ Plugins:
@@ -209,7 +203,7 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
    kubectl get secrets
    ```
    ---
-## 10. Deploy the Application
+### 10. Deploy the Application
    
 ```bash
      kubectl apply -f  best-buy.yaml
@@ -219,13 +213,19 @@ az aks create --resource-group <resource-group-name> --name <aks-cluster-name> -
 After the deployment is complete, you can access the application using the following;
 - Access the Store Front app at the external IP on port 80.
 - Access the Store Admin app at the external IP on port 80.
+  
 ---
+### 12. Demo Video Link
 
-## 12. Issues and Limitations 
-- Current implementation does not include extensive logging and monitoring.
-- AI-generated images may take longer depending on API response times.
-- As a macOS user, the Docker image format must be compatible with macOS architecture (ARM). When building and pushing Docker images, ensure the image is built in the correct format for your system to avoid compatibility issues.
-  - To specify the architecture, you can use the `--platform` flag when building the Docker image:
-    ```bash
-    docker build --platform linux/amd64 -t <username>/<service-name>:latest .
-    ```
+---
+### 13. Issues and Limitations 
+
+- When working on macOS, ensure that the Docker image format is compatible with your system architecture (ARM).  
+- To avoid compatibility issues, explicitly specify the target architecture when building Docker images. Use the `--platform` flag to define the platform:  
+  ```bash
+  docker build --platform linux/amd64 -t <username>/<service-name>:latest .
+  ```
+- **Subscription quota for AI deployments is limited**, allowing only **two deployment attempts**.  
+- Exceeding this limit may result in **delayed workflows** or the need for **additional subscription resources**.  
+- Plan deployments carefully to **maximize quota usage**.
+
